@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MY LIFE &bull; Personal Life Management System</title>
+  <meta name="description" content="Aplikasi web pribadi terpadu: Keuangan, Kuliah, Kalender, Alarm & Pengingat, Jadwal Makan, Rutinitas, Kesehatan, Catatan, Target, Dokumen & Produktivitas (WITA).">
+  <meta name="theme-color" content="#050508">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Modern Dark Cyber Luxury Stylesheet -->
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar" id="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-glow">✦</div>
+        <div>
+          <div class="sidebar-title gradient-text">MY LIFE</div>
+          <div class="sidebar-subtitle">Life Management System</div>
+        </div>
+      </div>
+
+      <nav style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
+        <div class="nav-group-label">UTAMA</div>
+        <a class="nav-link active" data-view="dashboard" onclick="window.app.navigate('dashboard')">
+          <span id="nav-icon-dashboard"></span>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-link" data-view="finance" onclick="window.app.navigate('finance')">
+          <span id="nav-icon-finance"></span>
+          <span>Keuangan</span>
+        </a>
+        <a class="nav-link" data-view="academic" onclick="window.app.navigate('academic')">
+          <span id="nav-icon-academic"></span>
+          <span>Kuliah &amp; Tugas</span>
+          <span class="nav-badge" id="sidebar-task-badge">0</span>
+        </a>
+        <a class="nav-link" data-view="calendar" onclick="window.app.navigate('calendar')">
+          <span id="nav-icon-calendar"></span>
+          <span>Kalender</span>
+        </a>
+
+        <div class="nav-group-label">KESEHARIAN &amp; DISIPLIN</div>
+        <a class="nav-link" data-view="reminders" onclick="window.app.navigate('reminders')">
+          <span id="nav-icon-reminders"></span>
+          <span>Alarm &amp; Pengingat</span>
+        </a>
+        <a class="nav-link" data-view="meals" onclick="window.app.navigate('meals')">
+          <span id="nav-icon-meals"></span>
+          <span>Jadwal Makan &amp; Air</span>
+        </a>
+        <a class="nav-link" data-view="routines" onclick="window.app.navigate('routines')">
+          <span id="nav-icon-routines"></span>
+          <span>Rutinitas Harian</span>
+        </a>
+        <a class="nav-link" data-view="health" onclick="window.app.navigate('health')">
+          <span id="nav-icon-health"></span>
+          <span>Kesehatan &amp; Olahraga</span>
+        </a>
+
+        <div class="nav-group-label">PRODUKTIVITAS &amp; ARSIP</div>
+        <a class="nav-link" data-view="notes" onclick="window.app.navigate('notes')">
+          <span id="nav-icon-notes"></span>
+          <span>Catatan Pribadi</span>
+        </a>
+        <a class="nav-link" data-view="goals" onclick="window.app.navigate('goals')">
+          <span id="nav-icon-goals"></span>
+          <span>Target &amp; Impian</span>
+        </a>
+        <a class="nav-link" data-view="shopping" onclick="window.app.navigate('shopping')">
+          <span id="nav-icon-shopping"></span>
+          <span>Daftar Belanja</span>
+        </a>
+        <a class="nav-link" data-view="documents" onclick="window.app.navigate('documents')">
+          <span id="nav-icon-documents"></span>
+          <span>Dokumen Pribadi</span>
+        </a>
+        <a class="nav-link" data-view="productivity" onclick="window.app.navigate('productivity')">
+          <span id="nav-icon-productivity"></span>
+          <span>Pomodoro &amp; Fokus</span>
+        </a>
+        <a class="nav-link" data-view="reports" onclick="window.app.navigate('reports')">
+          <span id="nav-icon-reports"></span>
+          <span>Laporan &amp; Rekap</span>
+        </a>
+
+        <div class="nav-group-label">SISTEM</div>
+        <a class="nav-link" data-view="settings" onclick="window.app.navigate('settings')">
+          <span id="nav-icon-settings"></span>
+          <span>Pengaturan</span>
+        </a>
+      </nav>
+
+      <!-- User footer in sidebar -->
+      <div style="padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="width: 34px; height: 34px; border-radius: 50%; overflow: hidden; border: 1.5px solid #c084fc;">
+            <img id="sidebar-user-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div>
+            <div id="sidebar-user-name" style="font-size: 13px; font-weight: 700; color: #fff;">Oki Vidya</div>
+            <div style="font-size: 10px; color: #34d399;">● Online &bull; WITA</div>
+          </div>
+        </div>
+        <button onclick="window.app.lockNow()" class="btn-icon" title="Kunci Aplikasi">
+          <span id="nav-icon-lock"></span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+      <!-- Top Sticky App Header -->
+      <header class="app-header">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <button id="mobile-menu-toggle" onclick="document.getElementById('app-sidebar').classList.toggle('mobile-open')" class="btn-icon" style="display: none;">
+            ☰
+          </button>
+          <div class="header-time-pill">
+            <span style="color: #38bdf8;">⏰</span>
+            <span id="header-live-clock">--:--:-- WITA</span>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button onclick="window.app.openQuickAddModal('transaction')" class="btn-primary" style="padding: 7px 14px; font-size: 13px;">
+            <span id="btn-icon-plus"></span>
+            <span>+ Catat Cepat</span>
+          </button>
+          <button onclick="window.alarmWatcher.requestPermission()" class="btn-icon" title="Izin Notifikasi Web">
+            <span id="btn-icon-bell"></span>
+          </button>
+          <button onclick="window.app.lockNow()" class="btn-icon" title="Kunci Master PIN">
+            <span id="btn-icon-lock-header"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Active Page Mount Point -->
+      <main id="app-main-content">
+        <!-- Components dynamically rendered here -->
+      </main>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-bar">
+      <a class="mobile-nav-btn active" data-view="dashboard" onclick="window.app.navigate('dashboard')">
+        <span id="mob-icon-dashboard"></span>
+        <span>Home</span>
+      </a>
+      <a class="mobile-nav-btn" data-view="finance" onclick="window.app.navigate('finance')">
+        <span id="mob-icon-finance"></span>
+        <span>Keuangan</span>
+      </a>
+      <a class="mobile-nav-btn" data-view="academic" onclick="window.app.navigate('academic')">
+        <span id="mob-icon-academic"></span>
+        <span>Kuliah</span>
+      </a>
+      <a class="mobile-nav-btn" data-view="reminders" onclick="window.app.navigate('reminders')">
+        <span id="mob-icon-reminders"></span>
+        <span>Alarm</span>
+      </a>
+      <a class="mobile-nav-btn" onclick="document.getElementById('app-sidebar').classList.toggle('mobile-open')">
+        <span>☰</span>
+        <span>Menu</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/vendor/supabase.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/notifications.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Inject Icons after DOM Load -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Sidebar Icons
+      document.getElementById('nav-icon-dashboard').innerHTML = Icons.dashboard('w-4 h-4');
+      document.getElementById('nav-icon-finance').innerHTML = Icons.finance('w-4 h-4');
+      document.getElementById('nav-icon-academic').innerHTML = Icons.academic('w-4 h-4');
+      document.getElementById('nav-icon-calendar').innerHTML = Icons.calendar('w-4 h-4');
+      document.getElementById('nav-icon-reminders').innerHTML = Icons.reminders('w-4 h-4');
+      document.getElementById('nav-icon-meals').innerHTML = Icons.meals('w-4 h-4');
+      document.getElementById('nav-icon-routines').innerHTML = Icons.routines('w-4 h-4');
+      document.getElementById('nav-icon-health').innerHTML = Icons.health('w-4 h-4');
+      document.getElementById('nav-icon-notes').innerHTML = Icons.notes('w-4 h-4');
+      document.getElementById('nav-icon-goals').innerHTML = Icons.goals('w-4 h-4');
+      document.getElementById('nav-icon-shopping').innerHTML = Icons.shopping('w-4 h-4');
+      document.getElementById('nav-icon-documents').innerHTML = Icons.documents('w-4 h-4');
+      document.getElementById('nav-icon-productivity').innerHTML = Icons.productivity('w-4 h-4');
+      document.getElementById('nav-icon-reports').innerHTML = Icons.reports('w-4 h-4');
+      document.getElementById('nav-icon-settings').innerHTML = Icons.settings('w-4 h-4');
+      document.getElementById('nav-icon-lock').innerHTML = Icons.lock('w-4 h-4');
+
+      // Header Icons
+      document.getElementById('btn-icon-plus').innerHTML = Icons.plus('w-3.5 h-3.5');
+      document.getElementById('btn-icon-bell').innerHTML = Icons.bell('w-4 h-4');
+      document.getElementById('btn-icon-lock-header').innerHTML = Icons.lock('w-4 h-4');
+
+      // Mobile Bottom Bar Icons
+      document.getElementById('mob-icon-dashboard').innerHTML = Icons.dashboard('w-5 h-5');
+      document.getElementById('mob-icon-finance').innerHTML = Icons.finance('w-5 h-5');
+      document.getElementById('mob-icon-academic').innerHTML = Icons.academic('w-5 h-5');
+      document.getElementById('mob-icon-reminders').innerHTML = Icons.reminders('w-5 h-5');
+    });
+  </script>
+</body>
+</html>
