@@ -101,6 +101,12 @@ class App {
       taskBadge.textContent = activeTasksCount;
     }
 
+    // Jika akun pemilik belum disetup pertama kali, tampilkan wizard setup
+    if (!profile.is_configured) {
+      this.renderSetupOwnerScreen();
+      return;
+    }
+
     if (this.isLocked) {
       this.renderLockScreen();
       return;
@@ -156,6 +162,68 @@ class App {
       default:
         appEl.innerHTML = Components.renderDashboard();
     }
+  }
+
+  // =========================================================================
+  // SETUP PEMILIK BARU (KONFIGURASI AWAL)
+  // =========================================================================
+  renderSetupOwnerScreen() {
+    const appEl = document.getElementById('app-main-content');
+    appEl.innerHTML = `
+      <div style="min-height: calc(100vh - 70px); display: flex; align-items: center; justify-content: center; padding: 20px;">
+        <div class="glow-card" style="width: 100%; max-width: 480px; padding: 36px 30px; text-align: center; border-image: linear-gradient(135deg, #c084fc, #38bdf8) 1; box-shadow: 0 0 50px rgba(168, 85, 247, 0.4);">
+          <div style="width: 70px; height: 70px; margin: 0 auto 16px; border-radius: 20px; background: linear-gradient(135deg, #a855f7, #38bdf8); display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 0 25px rgba(168, 85, 247, 0.6);">
+            ✦
+          </div>
+          <div class="glow-pill" style="margin-bottom: 8px;">MY LIFE &bull; KONFIGURASI AWAL</div>
+          <h2 class="gradient-text" style="font-size: 24px; font-weight: 800; margin-bottom: 6px;">Setup Akun Pemilik Sistem</h2>
+          <p style="font-size: 13px; color: #94a3b8; margin-bottom: 24px;">Data demo telah dibersihkan sepenuhnya. Silakan atur nama dan profil pribadi Anda untuk memulai sistem.</p>
+          
+          <form onsubmit="window.app.submitOwnerSetup(event)" style="text-align: left;">
+            <div class="form-group">
+              <label class="form-label">Nama Lengkap Anda</label>
+              <input type="text" id="setup-owner-name" class="form-input" placeholder="Masukkan nama Anda..." required autofocus>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nama Panggilan</label>
+              <input type="text" id="setup-owner-nickname" class="form-input" placeholder="Contoh: Oki" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Perguruan Tinggi / Instansi (Opsional)</label>
+              <input type="text" id="setup-owner-campus" class="form-input" placeholder="Contoh: Universitas Hasanuddin">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Master PIN Keamanan (6 Digit)</label>
+              <input type="password" id="setup-owner-pin" class="form-input" maxlength="6" value="123456" required>
+              <span style="font-size: 11px; color: #94a3b8;">Default Master PIN: <strong>123456</strong> (dapat diubah nanti di Pengaturan)</span>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 13px; font-size: 15px; margin-top: 10px;">
+              ${Icons.sparkles('w-4 h-4')} Mulai Menggunakan MY LIFE
+            </button>
+          </form>
+        </div>
+      </div>
+    `;
+  }
+
+  submitOwnerSetup(e) {
+    if (e) e.preventDefault();
+    const name = document.getElementById('setup-owner-name').value.trim();
+    const nickname = document.getElementById('setup-owner-nickname').value.trim() || name;
+    const campus = document.getElementById('setup-owner-campus').value.trim();
+    const pin = document.getElementById('setup-owner-pin').value || '123456';
+
+    window.store.update('profile', null, {
+      name: name,
+      nickname: nickname,
+      campus: campus,
+      is_configured: true
+    });
+    window.store.update('settings', null, {
+      master_pin: pin
+    });
+    this.showToast(`Selamat Datang, ${nickname}! Akun Anda siap digunakan.`);
+    this.render();
   }
 
   // =========================================================================
@@ -2307,9 +2375,12 @@ class App {
 
   confirmResetAllData() {
     if (confirm('PERINGATAN: Apakah Anda yakin ingin menghapus semua data dan membersihkan sistem? Data akan kembali ke kondisi awal bersih.')) {
+      try {
+        localStorage.clear();
+      } catch(e){}
       window.store.resetAllData();
       this.showToast('Sistem dibersihkan ke kondisi awal bersih.');
-      this.render();
+      setTimeout(() => window.location.reload(), 500);
     }
   }
 }

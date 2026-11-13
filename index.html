@@ -11,13 +11,32 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
+  <!-- Cache Buster & Legacy Demo Storage Purger -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      caches.keys().then(function(names) {
+        for (var i = 0; i < names.length; i++) {
+          if (names[i] !== 'my-life-v-final-clean-v2') {
+            caches.delete(names[i]);
+          }
+        }
+      });
+    }
+    try {
+      localStorage.removeItem('my_life_app_data_v1');
+      localStorage.removeItem('my_life_app_data');
+      localStorage.removeItem('my_life_demo');
+      localStorage.removeItem('my_life_app_data_final_v1');
+    } catch(e) {}
+  </script>
+
   <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Modern Dark Cyber Luxury Stylesheet -->
-  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/theme.css?v=20261113c">
 </head>
 <body>
   <div class="app-container">
@@ -178,14 +197,14 @@
     </nav>
   </div>
 
-  <!-- Scripts -->
-  <script src="js/vendor/supabase.js"></script>
-  <script src="js/audio.js"></script>
-  <script src="js/icons.js"></script>
-  <script src="js/store.js"></script>
-  <script src="js/notifications.js"></script>
-  <script src="js/components.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Scripts with Version Query to bust browser cache -->
+  <script src="js/vendor/supabase.js?v=20261113c"></script>
+  <script src="js/audio.js?v=20261113c"></script>
+  <script src="js/icons.js?v=20261113c"></script>
+  <script src="js/store.js?v=20261113c"></script>
+  <script src="js/notifications.js?v=20261113c"></script>
+  <script src="js/components.js?v=20261113c"></script>
+  <script src="js/app.js?v=20261113c"></script>
 
   <!-- Inject Icons after DOM Load -->
   <script>

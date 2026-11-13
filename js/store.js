@@ -3,18 +3,28 @@
    Data Bersih Tanpa Demo & Siap Produksi
    ========================================================================== */
 
-const STORAGE_KEY = 'my_life_app_data_final_v1';
+const STORAGE_KEY = 'my_life_app_data_final_v2';
 
-// Format awal bersih tanpa data dummy / demo
+// Hapus secara otomatis semua cache & data demo lawas dari localStorage browser
+try {
+  ['my_life_app_data_v1', 'my_life_app_data', 'my_life_demo', 'my_life_app_data_final_v1'].forEach(key => {
+    localStorage.removeItem(key);
+  });
+} catch (e) {
+  console.warn('Gagal membersihkan cache lama:', e);
+}
+
+// Data awal murni bersih tanpa dummy / data demo
 const cleanInitialData = {
   profile: {
-    name: 'Oki Vidya',
-    nickname: 'Oki',
+    name: '',
+    nickname: '',
     title: 'Pemilik Akun',
     campus: '',
     email: '',
     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
-    bio: 'Menata hidup teratur, fokus, dan produktif setiap hari.'
+    bio: '',
+    is_configured: false
   },
   settings: {
     timezone: 'Asia/Makassar', // WITA UTC+8
@@ -75,7 +85,11 @@ class Store {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
-        return JSON.parse(stored);
+        const parsed = JSON.parse(stored);
+        // Pastikan tidak ada data sisa dari demo
+        if (parsed && typeof parsed.profile === 'object') {
+          return parsed;
+        }
       }
     } catch (e) {
       console.warn('Gagal memuat local storage, menggunakan data awal bersih.', e);
@@ -245,7 +259,11 @@ class Store {
     return false;
   }
 
+  // Bersihkan total semua data dan kembalikan ke awal
   resetAllData() {
+    try {
+      localStorage.clear();
+    } catch(e){}
     this.data = JSON.parse(JSON.stringify(cleanInitialData));
     this.save();
   }
