@@ -3,11 +3,18 @@
    Data Bersih Tanpa Demo & Siap Produksi
    ========================================================================== */
 
-const STORAGE_KEY = 'my_life_app_data_final_v3';
+const STORAGE_KEY = 'my_life_app_data_final_v4';
 
 // Hapus secara otomatis semua cache & data demo lawas dari localStorage browser
 try {
-  ['my_life_app_data_v1', 'my_life_app_data', 'my_life_demo', 'my_life_app_data_final_v1', 'my_life_app_data_final_v2'].forEach(key => {
+  [
+    'my_life_app_data_v1', 
+    'my_life_app_data', 
+    'my_life_demo', 
+    'my_life_app_data_final_v1', 
+    'my_life_app_data_final_v2', 
+    'my_life_app_data_final_v3'
+  ].forEach(key => {
     localStorage.removeItem(key);
   });
 } catch (e) {
@@ -27,15 +34,15 @@ const cleanInitialData = {
     is_configured: false
   },
   settings: {
-    timezone: 'Asia/Makassar', // WITA UTC+8
+    timezone: (window.MY_LIFE_CONFIG && window.MY_LIFE_CONFIG.DEFAULT_TIMEZONE) || 'Asia/Makassar', // WITA UTC+8
     theme: 'obsidian-cyber',
     master_pin: '123456',
     pin_enabled: false,
     alarm_sound: 'melodic',
     snooze_minutes: 10,
     push_notifications: false,
-    supabase_url: '',
-    supabase_key: '',
+    supabase_url: (window.MY_LIFE_CONFIG && window.MY_LIFE_CONFIG.SUPABASE_URL) || '',
+    supabase_key: (window.MY_LIFE_CONFIG && window.MY_LIFE_CONFIG.SUPABASE_ANON_KEY) || '',
     last_synced: null
   },
   transactions: [],
@@ -86,8 +93,18 @@ class Store {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        // Pastikan tidak ada data sisa dari demo
-        if (parsed && typeof parsed.profile === 'object') {
+        // Pastikan tidak ada data sisa dari demo lawas
+        const isOldDemo = parsed.transactions && parsed.transactions.some(t => Number(t.amount) === 4250000 || Number(t.amount) === 385000);
+        if (parsed && typeof parsed.profile === 'object' && !isOldDemo) {
+          // Sinkronkan kredensial dari config.js jika ada
+          if (window.MY_LIFE_CONFIG) {
+            if (!parsed.settings.supabase_url && window.MY_LIFE_CONFIG.SUPABASE_URL) {
+              parsed.settings.supabase_url = window.MY_LIFE_CONFIG.SUPABASE_URL;
+            }
+            if (!parsed.settings.supabase_key && window.MY_LIFE_CONFIG.SUPABASE_ANON_KEY) {
+              parsed.settings.supabase_key = window.MY_LIFE_CONFIG.SUPABASE_ANON_KEY;
+            }
+          }
           return parsed;
         }
       }
@@ -259,7 +276,7 @@ class Store {
     return false;
   }
 
-  // Bersihkan total semua data dan kembalikan ke awal
+  // Bersihkan total semua data dan kembalikan ke awal murni kosong
   resetAllData() {
     try {
       localStorage.clear();

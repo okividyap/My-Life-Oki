@@ -1445,16 +1445,20 @@ const Components = {
               </button>
             </div>
 
-            <div class="grid-cols-2" style="margin-bottom: 16px;">
+            <div class="grid-cols-2" style="margin-bottom: 12px;">
               <div class="form-group">
                 <label class="form-label">Supabase Project URL</label>
-                <input type="text" id="set-supabase-url" class="form-input" placeholder="https://your-project.supabase.co" value="${settings.supabase_url || ''}">
+                <input type="text" id="set-supabase-url" class="form-input" placeholder="https://your-project.supabase.co" value="${settings.supabase_url || (window.MY_LIFE_CONFIG && window.MY_LIFE_CONFIG.SUPABASE_URL) || ''}">
               </div>
               <div class="form-group">
                 <label class="form-label">Supabase Anon Public Key</label>
-                <input type="text" id="set-supabase-key" class="form-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI..." value="${settings.supabase_key || ''}">
+                <input type="text" id="set-supabase-key" class="form-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI..." value="${settings.supabase_key || (window.MY_LIFE_CONFIG && window.MY_LIFE_CONFIG.SUPABASE_ANON_KEY) || ''}">
               </div>
             </div>
+            <p style="font-size: 12px; color: #a855f7; margin-bottom: 16px; display: flex; align-items: center; gap: 6px;">
+              ${Icons.sparkles('w-3.5 h-3.5')}
+              <span>Tips: Kredensial ini juga dapat diisi langsung di file <strong>config.js</strong> di root folder proyek VS Code.</span>
+            </p>
 
             <div style="display: flex; gap: 10px; justify-content: flex-end;">
               <button onclick="window.app.saveSupabaseConfig()" class="btn-primary">

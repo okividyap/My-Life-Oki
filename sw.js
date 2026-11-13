@@ -1,12 +1,14 @@
 /* ==========================================================================
-   MY LIFE - Service Worker & Offline Cache (Versi Final 1.0 Clean)
+   MY LIFE - Service Worker & Offline Cache (Versi Final 1.0 Clean v4)
    ========================================================================== */
 
-const CACHE_NAME = 'my-life-v-final-clean-v3';
+const CACHE_NAME = 'my-life-v-final-clean-v4';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './config.js',
   './css/theme.css',
+  './js/config.js',
   './js/vendor/supabase.js',
   './js/audio.js',
   './js/icons.js',

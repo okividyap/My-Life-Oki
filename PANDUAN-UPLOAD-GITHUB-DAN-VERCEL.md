@@ -5,46 +5,68 @@ Folder ini adalah **satu-satunya folder proyek versi final** yang bersih dari da
 
 ---
 
+## ⚙️ Cara Memasukkan URL Supabase (Database Cloud)
+
+Anda dapat memasukkan **Supabase Project URL** dan **Supabase Anon Key** dengan salah satu dari 2 cara mudah:
+
+### 1. Cara 1: Lewat File `config.js` (Langsung di VS Code)
+Buka file `config.js` (ada langsung di root folder proyek Anda di VS Code):
+```javascript
+window.MY_LIFE_CONFIG = {
+  // Masukkan Supabase Project URL Anda di sini:
+  SUPABASE_URL: "https://proyek-anda.supabase.co",
+
+  // Masukkan Supabase Anon Public Key Anda di sini:
+  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+
+  DEFAULT_TIMEZONE: "Asia/Makassar",
+  APP_TITLE: "MY LIFE"
+};
+```
+Simpan file (`Cmd + S`). Selesai!
+
+### 2. Cara 2: Lewat Menu Pengaturan di Tampilan Web (Tanpa Buka Kode)
+1. Buka aplikasi MY LIFE di Safari / Chrome.
+2. Klik menu **Pengaturan** di sidebar sebelah kiri atau menu navigasi bawah.
+3. Gulir ke bagian **Integrasi Database Supabase PostgreSQL**.
+4. Tempel **Supabase Project URL** dan **Supabase Anon Public Key** di kolom yang tersedia.
+5. Klik tombol **Simpan & Uji Koneksi Cloud**.
+
+---
+
 ## 📌 Langkah 1: Upload ke GitHub
 
-### Opsi A: Lewat Terminal (Paling Cepat)
-1. Buka aplikasi **Terminal** di Mac Anda.
-2. Masuk ke folder proyek ini:
-   ```bash
-   cd ~/Documents/MY-LIFE-APP
-   ```
-3. Buat repositori baru di [GitHub](https://github.com/new) (beri nama misalnya `my-life-app`, pilih tipe **Private**).
-4. Hubungkan dan upload kode Anda dengan perintah berikut (ganti `<username>` dengan username GitHub Anda):
-   ```bash
-   git remote add origin https://github.com/<username>/my-life-app.git
-   git push -u origin main
-   ```
+Repositori GitHub Anda sudah terhubung:
+`https://github.com/okividyap/my-life-app`
 
-### Opsi B: Lewat GitHub Desktop
-1. Buka aplikasi **GitHub Desktop**.
-2. Pilih menu **File** > **Add Local Repository...**.
-3. Pilih folder `~/Documents/MY-LIFE-APP`.
-4. Klik **Publish repository** (pilih centang *Keep this code private* agar privat).
+Untuk memperbarui commit atau mengunggah perubahan terbaru lewat Terminal:
+```bash
+cd ~/Documents/MY-LIFE-APP
+git add .
+git commit -m "feat: update config.js and clean data"
+git push origin main
+```
 
 ---
 
 ## 🌐 Langkah 2: Deploy ke Vercel (Gratis & Online 24/7)
 
-1. Buka [vercel.com](https://vercel.com) dan login dengan akun GitHub Anda.
+1. Buka [vercel.com](https://vercel.com) dan login dengan akun GitHub Anda (`okividyap`).
 2. Klik tombol **"Add New..."** > **"Project"**.
 3. Di daftar repositori GitHub Anda, klik **"Import"** pada repositori `my-life-app`.
 4. Pada bagian pengaturan proyek:
-   - **Framework Preset:** Biarkan `Other` (karena konfigurasi `vercel.json` sudah tersedia otomatis di dalam proyek).
+   - **Framework Preset:** Biarkan `Other` (konfigurasi `vercel.json` sudah terpasang otomatis).
    - **Root Directory:** `./`
-5. Klik **"Deploy"**.
-6. Dalam hitungan 15 detik, aplikasi Anda sudah live dengan URL resmi (contoh: `https://my-life-app.vercel.app`) lengkap dengan HTTPS dan dukungan Progressive Web App (PWA) untuk iPhone/Android!
+5. Klik tombol **"Deploy"**.
+6. Dalam hitungan 15 detik, aplikasi Anda sudah live dengan URL resmi Vercel (contoh: `https://my-life-app.vercel.app`) lengkap dengan HTTPS dan dukungan Progressive Web App (PWA) untuk iPhone/Android!
 
 ---
 
 ## 💾 Struktur Folder Proyek
+- `config.js`: File konfigurasi utama untuk mengisi Supabase URL & Anon Key.
 - `index.html`: File antarmuka utama aplikasi web terpadu.
 - `css/theme.css`: Styling Dark Cyber Luxury (hitam obsidian, border ungu & biru neon).
-- `js/`: Script aplikasi, audio synthesizer, reactive store, dan komponen.
+- `js/`: Script aplikasi, audio synthesizer, reactive store, config fallback, dan komponen.
 - `supabase/schema.sql`: Skema database PostgreSQL lengkap dengan Row Level Security.
 - `manifest.webmanifest` & `sw.js`: PWA & Service Worker offline support.
 - `vercel.json`: Konfigurasi resmi Vercel hosting.
