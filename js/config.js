@@ -26,10 +26,10 @@
 
 window.MY_LIFE_CONFIG = {
   // Masukkan Supabase Project URL Anda di sini (misal: "https://xxx.supabase.co")
-  SUPABASE_URL: "",
+  SUPABASE_URL: "https://tukyfcdhqezjrvvnoxlv.supabase.co",
 
   // Masukkan Supabase Anon Public Key Anda di sini
-  SUPABASE_ANON_KEY: "",
+  SUPABASE_ANON_KEY: "sb_publishable_NaPb__PfC3D5xhRDQxYwhQ__evsqFnm",
 
   // Zona Waktu Default Sistem Operasional (WITA / UTC+8)
   DEFAULT_TIMEZONE: "Asia/Makassar",
