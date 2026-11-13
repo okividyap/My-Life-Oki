@@ -37,7 +37,7 @@ Simpan file (`Cmd + S`). Selesai!
 ## 📌 Langkah 1: Upload ke GitHub
 
 Repositori GitHub Anda sudah terhubung:
-`https://github.com/okividyap/my-life-app`
+`https://github.com/okividyap/My-Life-Oki`
 
 Untuk memperbarui commit atau mengunggah perubahan terbaru lewat Terminal:
 ```bash
