@@ -2,7 +2,7 @@
    MY LIFE - Service Worker & Offline Cache (Versi Final 1.0 Clean)
    ========================================================================== */
 
-const CACHE_NAME = 'my-life-v-final-clean-v2';
+const CACHE_NAME = 'my-life-v-final-clean-v3';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

@@ -16,7 +16,7 @@
     if ('serviceWorker' in navigator) {
       caches.keys().then(function(names) {
         for (var i = 0; i < names.length; i++) {
-          if (names[i] !== 'my-life-v-final-clean-v2') {
+          if (names[i] !== 'my-life-v-final-clean-v3') {
             caches.delete(names[i]);
           }
         }
@@ -27,6 +27,7 @@
       localStorage.removeItem('my_life_app_data');
       localStorage.removeItem('my_life_demo');
       localStorage.removeItem('my_life_app_data_final_v1');
+      localStorage.removeItem('my_life_app_data_final_v2');
     } catch(e) {}
   </script>
 
@@ -124,11 +125,11 @@
       <!-- User footer in sidebar -->
       <div style="padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: space-between;">
         <div style="display: flex; align-items: center; gap: 10px;">
-          <div style="width: 34px; height: 34px; border-radius: 50%; overflow: hidden; border: 1.5px solid #c084fc;">
-            <img id="sidebar-user-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+          <div id="sidebar-user-avatar" style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, #a855f7, #38bdf8); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; color: #ffffff; border: 1.5px solid #c084fc; box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);">
+            <span id="sidebar-user-initials">✦</span>
           </div>
           <div>
-            <div id="sidebar-user-name" style="font-size: 13px; font-weight: 700; color: #fff;">Oki Vidya</div>
+            <div id="sidebar-user-name" style="font-size: 13px; font-weight: 700; color: #fff;">Pemilik Akun</div>
             <div style="font-size: 10px; color: #34d399;">● Online &bull; WITA</div>
           </div>
         </div>

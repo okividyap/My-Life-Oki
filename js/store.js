@@ -3,18 +3,18 @@
    Data Bersih Tanpa Demo & Siap Produksi
    ========================================================================== */
 
-const STORAGE_KEY = 'my_life_app_data_final_v2';
+const STORAGE_KEY = 'my_life_app_data_final_v3';
 
 // Hapus secara otomatis semua cache & data demo lawas dari localStorage browser
 try {
-  ['my_life_app_data_v1', 'my_life_app_data', 'my_life_demo', 'my_life_app_data_final_v1'].forEach(key => {
+  ['my_life_app_data_v1', 'my_life_app_data', 'my_life_demo', 'my_life_app_data_final_v1', 'my_life_app_data_final_v2'].forEach(key => {
     localStorage.removeItem(key);
   });
 } catch (e) {
   console.warn('Gagal membersihkan cache lama:', e);
 }
 
-// Data awal murni bersih tanpa dummy / data demo
+// Data awal murni bersih tanpa dummy / foto demo
 const cleanInitialData = {
   profile: {
     name: '',
@@ -22,7 +22,7 @@ const cleanInitialData = {
     title: 'Pemilik Akun',
     campus: '',
     email: '',
-    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
+    avatar: '',
     bio: '',
     is_configured: false
   },

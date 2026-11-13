@@ -92,9 +92,12 @@ class App {
     // Update dynamic sidebar widgets
     const profile = window.store.get('profile') || {};
     const sidebarName = document.getElementById('sidebar-user-name');
-    if (sidebarName) sidebarName.textContent = profile.name || 'Pengguna';
-    const sidebarAvatar = document.getElementById('sidebar-user-avatar');
-    if (sidebarAvatar && profile.avatar) sidebarAvatar.src = profile.avatar;
+    if (sidebarName) sidebarName.textContent = profile.name || 'Pemilik Akun';
+    const sidebarInitials = document.getElementById('sidebar-user-initials');
+    if (sidebarInitials) {
+      const initials = (profile.nickname || profile.name || 'ML').slice(0, 2).toUpperCase();
+      sidebarInitials.textContent = initials || '✦';
+    }
     const taskBadge = document.getElementById('sidebar-task-badge');
     if (taskBadge) {
       const activeTasksCount = (window.store.getAll('tasks') || []).filter(t => t.status !== 'done').length;
@@ -236,8 +239,8 @@ class App {
     appEl.innerHTML = `
       <div style="min-height: calc(100vh - 70px); display: flex; align-items: center; justify-content: center; padding: 20px;">
         <div class="glow-card" style="width: 100%; max-width: 400px; padding: 36px 28px; text-align: center; border-image: linear-gradient(135deg, #c084fc, #38bdf8) 1; box-shadow: 0 0 40px rgba(168, 85, 247, 0.3);">
-          <div style="width: 70px; height: 70px; margin: 0 auto 16px; border-radius: 50%; overflow: hidden; border: 2px solid #c084fc; box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);">
-            <img src="${profile.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150'}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+          <div style="width: 72px; height: 72px; margin: 0 auto 16px; border-radius: 50%; background: linear-gradient(135deg, #a855f7, #38bdf8); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 26px; color: #ffffff; border: 2px solid #c084fc; box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);">
+            ${(profile.nickname || profile.name || 'ML').slice(0, 2).toUpperCase()}
           </div>
           <div class="glow-pill" style="margin-bottom: 8px;">AKUN PRIBADI TERKUNCI</div>
           <h2 style="font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 4px;">${profile.name || 'Pemilik Akun'}</h2>
