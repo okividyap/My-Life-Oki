@@ -69,7 +69,25 @@ class App {
     setInterval(updateTime, 1000);
   }
 
+  toggleSidebar(forceState = null) {
+    const sidebar = document.getElementById('app-sidebar');
+    const backdrop = document.getElementById('sidebar-backdrop');
+    if (!sidebar) return;
+    const isCurrentlyOpen = sidebar.classList.contains('mobile-open');
+    const shouldOpen = forceState !== null ? forceState : !isCurrentlyOpen;
+    if (shouldOpen) {
+      sidebar.classList.add('mobile-open');
+      if (backdrop) backdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    } else {
+      sidebar.classList.remove('mobile-open');
+      if (backdrop) backdrop.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
   navigate(viewName) {
+    this.toggleSidebar(false);
     this.currentView = viewName;
     window.scrollTo({ top: 0, behavior: 'smooth' });
     this.render();

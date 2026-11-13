@@ -2,7 +2,8 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-title" content="MY LIFE">
   <title>MY LIFE &bull; Personal Life Management System</title>
   <meta name="description" content="Aplikasi web pribadi terpadu: Keuangan, Kuliah, Kalender, Alarm & Pengingat, Jadwal Makan, Rutinitas, Kesehatan, Catatan, Target, Dokumen & Produktivitas (WITA).">
   <meta name="theme-color" content="#050508">
@@ -37,18 +38,21 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Modern Dark Cyber Luxury Stylesheet -->
-  <link rel="stylesheet" href="css/theme.css?v=20261113c">
+  <link rel="stylesheet" href="css/theme.css?v=20261113f">
 </head>
 <body>
   <div class="app-container">
     <!-- Desktop Sidebar -->
     <aside class="sidebar" id="app-sidebar">
       <div class="sidebar-brand">
-        <div class="sidebar-logo-glow">✦</div>
-        <div>
-          <div class="sidebar-title gradient-text">MY LIFE</div>
-          <div class="sidebar-subtitle">Life Management System</div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="sidebar-logo-glow">✦</div>
+          <div>
+            <div class="sidebar-title gradient-text">MY LIFE</div>
+            <div class="sidebar-subtitle">Life Management System</div>
+          </div>
         </div>
+        <button class="mobile-close-sidebar-btn" onclick="window.app.toggleSidebar(false)" title="Tutup Menu">✕</button>
       </div>
 
       <nav style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
@@ -139,14 +143,21 @@
       </div>
     </aside>
 
+    <!-- Mobile Drawer Backdrop Overlay -->
+    <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="window.app.toggleSidebar(false)"></div>
+
     <!-- Main Content Wrapper -->
     <div class="main-wrapper">
       <!-- Top Sticky App Header -->
       <header class="app-header">
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <button id="mobile-menu-toggle" onclick="document.getElementById('app-sidebar').classList.toggle('mobile-open')" class="btn-icon" style="display: none;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button id="mobile-menu-toggle" onclick="window.app.toggleSidebar()" class="btn-icon" title="Menu Sidebar">
             ☰
           </button>
+          <div class="header-brand-mobile">
+            <span class="sidebar-logo-glow" style="width: 24px; height: 24px; font-size: 12px;">✦</span>
+            <span class="gradient-text" style="font-weight: 800; font-size: 14.5px;">MY LIFE</span>
+          </div>
           <div class="header-time-pill">
             <span style="color: #38bdf8;">⏰</span>
             <span id="header-live-clock">--:--:-- WITA</span>
@@ -156,7 +167,7 @@
         <div class="header-actions">
           <button onclick="window.app.openQuickAddModal('transaction')" class="btn-primary" style="padding: 7px 14px; font-size: 13px;">
             <span id="btn-icon-plus"></span>
-            <span>+ Catat Cepat</span>
+            <span class="header-add-text">+ Catat Cepat</span>
           </button>
           <button onclick="window.alarmWatcher.requestPermission()" class="btn-icon" title="Izin Notifikasi Web">
             <span id="btn-icon-bell"></span>
@@ -191,7 +202,7 @@
         <span id="mob-icon-reminders"></span>
         <span>Alarm</span>
       </a>
-      <a class="mobile-nav-btn" onclick="document.getElementById('app-sidebar').classList.toggle('mobile-open')">
+      <a class="mobile-nav-btn" onclick="window.app.toggleSidebar()">
         <span>☰</span>
         <span>Menu</span>
       </a>
@@ -199,15 +210,15 @@
   </div>
 
   <!-- Scripts with Version Query to bust browser cache -->
-  <script src="config.js?v=20261113e"></script>
-  <script src="js/config.js?v=20261113e"></script>
-  <script src="js/vendor/supabase.js?v=20261113e"></script>
-  <script src="js/audio.js?v=20261113e"></script>
-  <script src="js/icons.js?v=20261113e"></script>
-  <script src="js/store.js?v=20261113e"></script>
-  <script src="js/notifications.js?v=20261113e"></script>
-  <script src="js/components.js?v=20261113e"></script>
-  <script src="js/app.js?v=20261113e"></script>
+  <script src="config.js?v=20261113f"></script>
+  <script src="js/config.js?v=20261113f"></script>
+  <script src="js/vendor/supabase.js?v=20261113f"></script>
+  <script src="js/audio.js?v=20261113f"></script>
+  <script src="js/icons.js?v=20261113f"></script>
+  <script src="js/store.js?v=20261113f"></script>
+  <script src="js/notifications.js?v=20261113f"></script>
+  <script src="js/components.js?v=20261113f"></script>
+  <script src="js/app.js?v=20261113f"></script>
 
   <!-- Inject Icons after DOM Load -->
   <script>

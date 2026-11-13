@@ -49,19 +49,19 @@ const Components = {
     return `
       <div class="page-container">
         <!-- Hero Banner -->
-        <div class="glow-card" style="padding: 28px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+        <div class="glow-card hero-banner" style="padding: 24px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
           <div>
             <div class="glow-pill" style="margin-bottom: 10px;">
               ${Icons.sparkles('w-3.5 h-3.5')} SISTEM KENDALI HIDUP PRIBADI &bull; VERSI FINAL
             </div>
-            <h1 class="gradient-text" style="font-size: 28px; line-height: 1.2; margin-bottom: 6px;">
+            <h1 class="gradient-text hero-title" style="font-size: 26px; line-height: 1.2; margin-bottom: 4px;">
               ${greeting}, ${profile.nickname || profile.name || 'Pengguna'}!
             </h1>
             <p style="color: #94a3b8; font-size: 14px;">
               ${formatDateIndo(now)} &bull; Waktu Indonesia Tengah (WITA, UTC+8)
             </p>
           </div>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <div class="hero-quick-actions" style="display: flex; gap: 10px; flex-wrap: wrap;">
             <button onclick="window.app.openTransactionModal('expense')" class="btn-primary">
               ${Icons.plus('w-4 h-4')} + Transaksi
             </button>
@@ -75,7 +75,7 @@ const Components = {
         </div>
 
         <!-- 4 Key Stat Cards -->
-        <div class="grid-cols-4" style="margin-bottom: 24px;">
+        <div class="grid-cols-4 dashboard-stats" style="margin-bottom: 24px;">
           <div class="glow-card stat-card glow-card-interactive" onclick="window.app.navigate('finance')">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
               <span class="stat-label">Total Saldo Keuangan</span>
